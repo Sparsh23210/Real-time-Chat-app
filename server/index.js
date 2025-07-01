@@ -21,7 +21,8 @@ app.use(cors({
   credentials: true
 }));
 
-app.use(router);
+app.use('/api', router);
+
 io.on('connect',(socket)=>{
     console.log("we have a connection");
     socket.on('join',({name,room},callback)=>{
