@@ -4,19 +4,22 @@ const { adduser, removeuser, getuser, getusersinroom } = require('./Users');
 const http=require('http');
 const PORT= process.env.PORT || 5001;
 const cors = require('cors');
-
+const allowedOrigins = [
+  'http://localhost:3000', // for local development
+  'https://real-time-chat-app3.onrender.com' // your Render domain
+];
 const router=require('./Router');
 const app = express();
 const server=http.createServer(app);
 const io = socketio(server, {
   cors: {
-    origin: 'http://localhost:3000', 
+    origin:allowedOrigins , 
     methods: ['GET', 'POST'],
     credentials: true
   }
 });
 app.use(cors({
-  origin: 'http://localhost:3000',
+  origin: allowedOrigins,
   methods: ['GET', 'POST'],
   credentials: true
 }));
